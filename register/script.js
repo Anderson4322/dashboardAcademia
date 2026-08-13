@@ -1,0 +1,26 @@
+ const api = "http://localhost:3000/"
+document.querySelector("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const password = document.querySelector("#senha").value;
+    const user = document.querySelector("#nome").value;
+    const resposta = await fetch(`${api}cadastro`, {
+
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            user,
+            password
+        })
+    })
+    if (resposta.status === 201) {
+        alert("Cadastrado com sucesso");
+        window.location.replace("../Connect/index.html");
+    } else {
+        alert("Cadastro inválido! Ou Email já cadastrado");
+
+
+    }
+})
