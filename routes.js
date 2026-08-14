@@ -15,7 +15,7 @@ routes.post("/login", async (req, res) => {
     return res.status(500);
   }
 });
-routes.get("/usuarios", async (req, res) => {
+routes.get("/usuario", async (req, res) => {
   const resposta = await sql`select * from usuario`;
   return res.status(200).json(resposta);
 });
