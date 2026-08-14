@@ -46,31 +46,21 @@ form.addEventListener("submit", async (e) => {
     
     
     
-    const nome_prod = document.querySelector("#nome_prod").value
-    const codigo = document.querySelector("#codigo").value
-    const preco = document.querySelector("#preco").value
-    const quantidade = document.querySelector("#quantidade").value
-    const cor = document.querySelector("#cor").value
-    const capac = document.querySelector("#capac").value
-    const espec = document.querySelector("#espec").value
-    const quantidade_min = document.querySelector("#quantidade_min").value
-    const id_fabric = document.querySelector("#id_fabric").value
+    const nome_treino = document.querySelector("#treino").value;
+    const exercicio = document.querySelector("#exercicios").value;
+    const id_prof = document.querySelector("#id_usuario").value;
+    const id_user = localStorage.getItem("id")
     
-    const resposta = await fetch(`${api}cad_produto`, {
+    const resposta = await fetch(`${api}cad_treinos`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            nome_prod,
-            codigo,
-            preco,
-            quantidade,
-            cor,
-            capac,
-            espec,
-            quantidade_min,
-            id_fabric
+            nome_treino,
+            exercicio,
+            id_prof,
+            id_user
         }),
     });
     
@@ -80,6 +70,7 @@ form.addEventListener("submit", async (e) => {
         window.location.reload()
     } else {
         alert("Erro");
+        
     }
 });
 
@@ -91,15 +82,15 @@ disconnect.addEventListener('click', () => {
     window.location.replace("../Connect/index.html")
 })
 
-const id_fabric = document.querySelector("#id_fabric")
+const id_fabric = document.querySelector("#id_usuario")
 let prods = [];
 window.addEventListener("load", async () => {
-    const resposta = await fetch(`${api}produtos`);
+    const resposta = await fetch(`${api}treinos`);
     prods = await resposta.json();
     console.log(prods)
     prods.forEach((prod) => {
         id_fabric.innerHTML += `
-      <option value="${prod.id_fab}">${prod.nome_fab}</option>
+      <option value="${prod.id_user}">${prod.nome_user}</option>
       `;
     })
     renderizar(prods);
@@ -108,16 +99,11 @@ window.addEventListener("load", async () => {
 function renderizar(prods) {
     prods.forEach((element) => {
         corpo.innerHTML += `     <tr>
-                <td>${element.id_prod}</td>
-                <td>${element.id_fab}</td>
-                <td>${element.nome_prod}</td>
-                <td>${element.codigo}</td>
-                <td>${element.preco}</td>
-                <td>${element.quantidade}</td>
-                <td>${element.cor}</td>
-                <td>${element.capac}</td>
-                <td>${element.espec}</td>
-                <td>${element.quantidade_min}</td>
+                <td>${element.id_treino}</td>
+                <td>${element.id_user}</td>
+                <td>${element.nome_treino}</td>
+                <td>${element.exercicio}</td>
+                <td>${element.nome_prof}</td>
                 <td>
                 <div id="buttonMove">
                 <button onclick="deletar(${element.id_prod})">🗑️</button>
@@ -143,14 +129,9 @@ async function editar(id) {
     const produto = await fetch(`${api}/produto/${id}`);
     const prod = await produto.json();
     const datas = {
-        nome_prod: prompt("Nome do produto", prod.nome_prod),
-        codigo: prompt("codigo", prod.codigo),
-        preco: prompt("preco", prod.preco),
-        quantidade: prompt("quantidade", prod.quantidade),
-        cor: prompt("cor", prod.cor),
-        capac: prompt("capacidade", prod.capac),
-        espec: prompt("especifações", prod.espec),
-        quantidade_min: prompt("quantidade minima", prod.quantidade_min),
+        nome_treino: prompt("Nome do treino", prod.nome_treino),
+        exercicio: prompt("Exercicios", prod.exercicio),
+        
     };
     const resposta = await fetch(`${api}/editar/${id}`, {
         method: "put",

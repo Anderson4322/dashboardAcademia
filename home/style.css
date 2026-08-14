@@ -101,15 +101,8 @@ form {
   transition: 0.3s;
 }
 
-#nome_prod,
-#codigo,
-#preco,
-#capac,
-#id_fabric,
-#espec,
-#quantidade_min,
-#quantidade,
-#cor {
+#treino, #exercicio, #id_usuario
+ {
   width: 40vh;
   height: 4vh;
 }
