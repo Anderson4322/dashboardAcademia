@@ -20,7 +20,8 @@ form.addEventListener("submit", async (e) => {
   if (resposta.status == 200) {
     const usuarios = await resposta.json();
     localStorage.setItem('id', usuarios.id_user)
-    localStorage.setItem('nome', usuarios.nome)
+    localStorage.setItem('nome', usuarios.nome_user)
+    localStorage.setItem('cargo', usuarios.cargo)
     alert("Login Concluido!")
     window.location.href = "../home/index.html"
   } else {

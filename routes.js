@@ -5,7 +5,8 @@ const routes = express.Router();
 routes.post("/login", async (req, res) => {
   try {
     const { user, password } = req.body;
-    const resposta = await sql`select * from usuario where nome = ${user}`;
+    console.log(req.body)
+    const resposta = await sql`select * from usuario where nome_user = ${user}`;
     if (password == resposta[0].senha) {
       return res.status(200).json(resposta[0]);
     }
@@ -29,7 +30,7 @@ routes.post("/cadastro", async (req, res) => {
   try {
     const { user, password } = req.body;
     console.log(user, password)
-    await sql`INSERT INTO usuario(nome, senha) VALUES (${user},${password})`;
+    await sql`INSERT INTO usuario(nome_user, senha) VALUES (${user},${password})`;
     return res.status(201).json();
   } catch (error) {
     console.log(error);
@@ -67,19 +68,24 @@ routes.get("/treinos", async (req, res) => {
         SELECT *
         FROM treinos
         WHERE 
-          nome_treino ILIKE ${"%" + search + "%"}
+         nome_treino ILIKE ${"%" + search + "%"}
       `;
   } else {
     rows = await sql`
-        SELECT *
-        FROM treinos
-        as p join usuario as f on p.id_user = f.id_user
+       SELECT *
+      FROM treinos AS t
+      JOIN usuario AS u
+       ON t.id_user = u.id_user
+      JOIN professor AS p
+       ON t.id_prof = p.id_prof
+      ORDER BY t.id_treino DESC;
       `;
   }
   return res.status(200).json(rows);
 });
 
-routes.get("/treinos/:id", async (req, res) => {
+
+routes.get("/treinos_especif/:id", async (req, res) => {
   const { id } = req.params;
   const resposta = await sql`select * from treinos where id_treino=${id}`;
   return res.status(200).json(resposta[0]);
@@ -93,6 +99,7 @@ routes.post("/cad_treinos", async (req, res) => {
   try {
     const {
       nome_treino, exercicio, id_prof, id_user } = req.body;
+    console.log(req.body)
     const resposta =
       await sql`INSERT INTO treinos(nome_treino, exercicio, id_prof, id_user) VALUES (${nome_treino}, ${exercicio}, ${id_prof}, ${id_user}) RETURNING *`;
     return res.status(201).json(resposta[0]);
@@ -118,11 +125,10 @@ routes.delete("/deleta/:id", async (req, res) => {
 routes.put("/editar/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const {
-      id_user,nome_treino ,  exercicio, id_prof,  
-    } = req.body;
+    const { nome_treino, exercicio } = req.body;
+    console.log(req.params)
     const resposta =
-      await sql`update produtos set nome_prod = ${nome_treino}, ${exercicio} where id_treino=${id} RETURNING *`;
+      await sql`update treinos set nome_treino = ${nome_treino}, exercicio = ${exercicio} where id_treino= ${id} RETURNING *`;
     return res.status(201).json(resposta[0]);
   } catch (error) {
     console.error(error);
