@@ -1,6 +1,7 @@
 const userName = document.querySelector("h2")
 const btnlogin = document.querySelector(".login")
 const btnCadastro = document.querySelector(".cadastro")
+const cargo = localStorage.getItem("cargo")
 
 btnCadastro.addEventListener('click', () => {
     window.location.href = "../register/index.html"
@@ -12,16 +13,18 @@ btnlogin.addEventListener('click', () => {
 
 const name = localStorage.getItem("nome")
 
+
 const alertModal = document.querySelector("#modalLogin");
 if (!name) {
     userName.textContent = " Visitante"
+} else if(cargo == 2) {
+    userName.textContent = `Bem vindo professor: ${name}`
 } else {
-    userName.textContent = `${name}`
+    userName.textContent = `Bem vindo aluno: ${name}`
 }
 
 const openButton = document.querySelector("#open")
 
-const cargo = localStorage.getItem("cargo")
 
 if (cargo == 1) {
     openButton.style.display = "none"
@@ -92,8 +95,11 @@ disconnect.addEventListener('click', () => {
 
 const id_fabric = document.querySelector("#id_usuario")
 let prods = [];
+
+
+const id_user = localStorage.getItem("id")
 window.addEventListener("load", async () => {
-    const resposta = await fetch(`${api}treinos`);
+    const resposta = await fetch(`${api}treinos/${cargo}/${id_user}`);
 
     const usuarios = await fetch(`${api}usuario`);
     prods = await resposta.json();

@@ -60,27 +60,39 @@ routes.put("/editarUser/:id", async (req, res) => {
 
 
 //Treinos
-routes.get("/treinos", async (req, res) => {
-  const { search } = req.query;
+routes.get("/treinos/:cargo/:id_user", async (req, res) => {
+  const { cargo, id_user } = req.params;
+  console.log(req.params)
   let rows;
-  if (search) {
+  if (cargo == 2) {
     rows = await sql`
-        SELECT *
-        FROM treinos
-        WHERE 
-         nome_treino ILIKE ${"%" + search + "%"}
-      `;
-  } else {
-    rows = await sql`
-       SELECT *
+       
+              SELECT *
       FROM treinos AS t
       JOIN usuario AS u
        ON t.id_user = u.id_user
       JOIN professor AS p
        ON t.id_prof = p.id_prof
-      ORDER BY t.id_treino DESC;
+      ORDER BY t.id_treino DESC
       `;
+  } else {
+    rows = await sql`
+
+          SELECT *
+      FROM treinos AS t
+      JOIN usuario AS u
+       ON t.id_user = u.id_user
+      JOIN professor AS p
+       ON t.id_prof = p.id_prof
+       WHERE t.id_user = ${id_user}
+      ORDER BY t.id_treino DESC
+      `;
+      
   }
+
+  console.log(rows)
+
+
   return res.status(200).json(rows);
 });
 

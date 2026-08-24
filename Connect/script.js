@@ -16,15 +16,20 @@ form.addEventListener("submit", async (e) => {
       password
     }),
   });
-
-  if (resposta.status == 200) {
+if (resposta.status == 200) {
     const usuarios = await resposta.json();
-    localStorage.setItem('id', usuarios.id_user)
-    localStorage.setItem('nome', usuarios.nome_user)
-    localStorage.setItem('cargo', usuarios.cargo)
-    alert("Login Concluido!")
-    window.location.href = "../home/index.html"
-  } else {
+
+    console.log(usuarios);
+
+    localStorage.setItem('id', usuarios.id_user);
+    localStorage.setItem('nome', usuarios.nome_user);
+    localStorage.setItem('cargo', usuarios.cargo);
+
+    alert("Login Concluido!");
+    window.location.href = "../home/index.html";
+} else {
     alert("Usuario ou senha incorretos");
-  }
+}
+
 });
+
