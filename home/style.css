@@ -101,7 +101,7 @@ form {
   transition: 0.3s;
 }
 
-#treino, #exercicio, #id_usuario
+#treino, #exercicios, #id_usuario, #duracao, #repeticao
  {
   width: 40vh;
   height: 4vh;

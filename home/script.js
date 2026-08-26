@@ -59,8 +59,10 @@ form.addEventListener("submit", async (e) => {
 
     const nome_treino = document.querySelector("#treino").value;
     const exercicio = document.querySelector("#exercicios").value;
+    const duracao = document.querySelector("#duracao").value;
+    const repeticao = document.querySelector("#repeticao").value;
     const id_user = document.querySelector("#id_usuario").value;
-    const id_prof = localStorage.getItem("id_user")
+    const id_prof = localStorage.getItem("id")
 
     const resposta = await fetch(`${api}cad_treinos`, {
         method: "POST",
@@ -70,6 +72,8 @@ form.addEventListener("submit", async (e) => {
         body: JSON.stringify({
             nome_treino,
             exercicio,
+            duracao,
+            repeticao,
             id_prof,
             id_user
         }),
@@ -119,6 +123,8 @@ function renderizar(prods) {
                 <td>${element.id_treino}</td>
                 <td>${element.nome_user}</td>
                 <td>${element.nome_treino}</td>
+                <td>${element.duracao}</td>
+                <td>${element.repeticao}</td>
                 <td>${element.exercicio}</td>
                 <td>${element.nome_prof}</td>
                 <td>
@@ -135,6 +141,7 @@ function renderizar(prods) {
 
     if (cargo == 1) {
         editar.style.display = "none"
+        deleta.style.display = "none"
     }
 }
 

@@ -68,24 +68,22 @@ routes.get("/treinos/:cargo/:id_user", async (req, res) => {
     rows = await sql`
        
               SELECT *
-      FROM treinos AS t
-      JOIN usuario AS u
+      FROM treinos as t JOIN usuario AS u
        ON t.id_user = u.id_user
-      JOIN professor AS p
+        JOIN professor AS p
        ON t.id_prof = p.id_prof
-      ORDER BY t.id_treino DESC
       `;
+
   } else {
     rows = await sql`
 
           SELECT *
-      FROM treinos AS t
-      JOIN usuario AS u
+      FROM treinos as t JOIN usuario AS u
        ON t.id_user = u.id_user
-      JOIN professor AS p
+        JOIN professor AS p
        ON t.id_prof = p.id_prof
-       WHERE t.id_user = ${id_user}
-      ORDER BY t.id_treino DESC
+       where t.id_user = ${id_user}
+    
       `;
       
   }
@@ -110,10 +108,10 @@ routes.get("/professor", async (req, res) => {
 routes.post("/cad_treinos", async (req, res) => {
   try {
     const {
-      nome_treino, exercicio, id_prof, id_user } = req.body;
+      nome_treino, exercicio, id_prof, id_user, duracao, repeticao } = req.body;
     console.log(req.body)
     const resposta =
-      await sql`INSERT INTO treinos(nome_treino, exercicio, id_prof, id_user) VALUES (${nome_treino}, ${exercicio}, ${id_prof}, ${id_user}) RETURNING *`;
+      await sql`INSERT INTO treinos(nome_treino, exercicio, id_prof, id_user, duracao, repeticao) VALUES (${nome_treino}, ${exercicio}, ${id_prof}, ${id_user}, ${duracao}, ${repeticao}) RETURNING *`;
     return res.status(201).json(resposta[0]);
   } catch (error) {
     console.log(error);
