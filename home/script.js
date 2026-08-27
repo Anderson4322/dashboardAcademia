@@ -2,22 +2,22 @@ const userName = document.querySelector("h2")
 const btnlogin = document.querySelector(".login")
 const btnCadastro = document.querySelector(".cadastro")
 const cargo = localStorage.getItem("cargo")
+const name = localStorage.getItem("nome")
+
 
 btnCadastro.addEventListener('click', () => {
     window.location.href = "../register/index.html"
 })
 
+
 btnlogin.addEventListener('click', () => {
     window.location.href = "../Connect/index.html"
 })
 
-const name = localStorage.getItem("nome")
-
-
 const alertModal = document.querySelector("#modalLogin");
 if (!name) {
     userName.textContent = " Visitante"
-} else if(cargo == 2) {
+} else if (cargo == 2) {
     userName.textContent = `Bem vindo professor: ${name}`
 } else {
     userName.textContent = `Bem vindo aluno: ${name}`
@@ -55,8 +55,6 @@ const api = "http://localhost:3000/"
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-
-
     const nome_treino = document.querySelector("#treino").value;
     const exercicio = document.querySelector("#exercicios").value;
     const duracao = document.querySelector("#duracao").value;
@@ -89,7 +87,6 @@ form.addEventListener("submit", async (e) => {
     }
 });
 
-
 const disconnect = document.querySelector("#disconnect")
 disconnect.addEventListener('click', () => {
     localStorage.clear()
@@ -100,12 +97,11 @@ disconnect.addEventListener('click', () => {
 const id_fabric = document.querySelector("#id_usuario")
 let prods = [];
 
-
 const id_user = localStorage.getItem("id")
 window.addEventListener("load", async () => {
     const resposta = await fetch(`${api}treinos/${cargo}/${id_user}`);
-
     const usuarios = await fetch(`${api}usuario`);
+
     prods = await resposta.json();
     const users = await usuarios.json();
     console.log(prods)
@@ -114,14 +110,16 @@ window.addEventListener("load", async () => {
       <option value="${prod.id_user}">${prod.nome_user}</option>
       `;
     })
+
+
     renderizar(prods);
 });
+
 
 function renderizar(prods) {
     prods.forEach((element) => {
         corpo.innerHTML += `     <tr>
                 <td>${element.id_treino}</td>
-                <td>${element.nome_user}</td>
                 <td>${element.nome_treino}</td>
                 <td>${element.duracao}</td>
                 <td>${element.repeticao}</td>
@@ -135,17 +133,11 @@ function renderizar(prods) {
                 </td>
             </tr>`;
         total++;
-        quantidade.textContent = "Total de Alunos:" + total;
+        quantidade.textContent = "Total de Treinos:" + total;
     });
-    const editar = document.querySelector("#editar")
 
-    if (cargo == 1) {
-        editar.style.display = "none"
-        deleta.style.display = "none"
-    }
+
 }
-
-
 
 async function deletar(id) {
     const resposta = await fetch(`${api}deleta/${id}`, {

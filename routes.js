@@ -62,7 +62,7 @@ routes.put("/editarUser/:id", async (req, res) => {
 //Treinos
 routes.get("/treinos/:cargo/:id_user", async (req, res) => {
   const { cargo, id_user } = req.params;
-  console.log(req.params)
+ 
   let rows;
   if (cargo == 2) {
     rows = await sql`
@@ -87,10 +87,6 @@ routes.get("/treinos/:cargo/:id_user", async (req, res) => {
       `;
       
   }
-
-  console.log(rows)
-
-
   return res.status(200).json(rows);
 });
 
