@@ -120,6 +120,7 @@ function renderizar(prods) {
     prods.forEach((element) => {
         corpo.innerHTML += `     <tr>
                 <td>${element.id_treino}</td>
+                <td>${element.nome_user}</td>
                 <td>${element.nome_treino}</td>
                 <td>${element.duracao}</td>
                 <td>${element.repeticao}</td>
@@ -127,17 +128,17 @@ function renderizar(prods) {
                 <td>${element.nome_prof}</td>
                 <td>
                 <div id="buttonMove">
-                <button id="deletar" onclick="deletar(${element.id_treino})">🗑️</button>
-                <button id="editar" onclick="editar(${element.id_treino})">✏️</button>
+                ${cargo != 1 ? `<button id="deletar" onclick="deletar(${element.id_treino})">🗑️</button>` : '<div></div>'}
+                ${cargo != 1 ? `<button id="editar" onclick="editar(${element.id_treino})">✏️</button>` : '<div></div>'}                
                 </div>
                 </td>
             </tr>`;
         total++;
         quantidade.textContent = "Total de Treinos:" + total;
     });
-
-
 }
+
+
 
 async function deletar(id) {
     const resposta = await fetch(`${api}deleta/${id}`, {
