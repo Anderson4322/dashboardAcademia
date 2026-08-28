@@ -11,6 +11,8 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background-image: url("../imagem/6706e956ec7f40d4c73ff174_aparelhos-de-academia.webp");
+    background-size: cover;
 }
 
 div{
@@ -43,7 +45,7 @@ label{
 }
 
 #nome,
-#senha{
+#senha,#altura,#peso,#idade{
     width: 100%;
     height: 48px;
     border: 2px solid #d1d5db;

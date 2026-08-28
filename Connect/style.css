@@ -10,7 +10,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #111827, #1f2937);
+    background-image: url("../imagem//IMG_7632.jpg");
+    background-size: cover;
 }
 
 div{

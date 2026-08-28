@@ -20,7 +20,7 @@ routes.get("/usuario", async (req, res) => {
   const resposta = await sql`select * from usuario`;
   return res.status(200).json(resposta);
 });
-routes.get("/usuario/:id", async (req, res) => {
+routes.get("/usuario_especif/:id", async (req, res) => {
   const { id } = req.params;
   const resposta = await sql`select * from usuario where id_user= ${id}`;
   return res.status(200).json(resposta[0]);
@@ -28,9 +28,9 @@ routes.get("/usuario/:id", async (req, res) => {
 
 routes.post("/cadastro", async (req, res) => {
   try {
-    const { user, password } = req.body;
-    console.log(user, password)
-    await sql`INSERT INTO usuario(nome_user, senha) VALUES (${user},${password})`;
+    const { user, password, weight, height, years } = req.body;
+    console.log(user, password, weight, height, years)
+    await sql`INSERT INTO usuario(nome_user, senha, peso, altura, idade) VALUES (${user},${password},${weight},${height},${years})`;
     return res.status(201).json();
   } catch (error) {
     console.log(error);

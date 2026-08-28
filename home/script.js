@@ -130,6 +130,7 @@ function renderizar(prods) {
                 <div id="buttonMove">
                 ${cargo != 1 ? `<button id="deletar" onclick="deletar(${element.id_treino})">🗑️</button>` : '<div></div>'}
                 ${cargo != 1 ? `<button id="editar" onclick="editar(${element.id_treino})">✏️</button>` : '<div></div>'}                
+                ${cargo != 1 ? `<button id="ficha" onclick="ficha(${element.id_user})">🗃️</button>` : '<div></div>'}                
                 </div>
                 </td>
             </tr>`;
@@ -138,6 +139,26 @@ function renderizar(prods) {
     });
 }
 
+async function ficha(id) {
+    console.log(id)
+    const closeDetalhes = document.querySelector("#closeDetalhes")
+    closeDetalhes.addEventListener('click', () => {
+        const modalDetalhes = document.querySelector("#DetalhesModal")
+        modalDetalhes.close()
+    })
+    const usuario = await fetch(`${api}usuario_especif/${id}`);
+    const user = await usuario.json();
+    const modalDetalhes = document.querySelector("#DetalhesModal")
+    const Nome_aluno = document.querySelector("#Nome_aluno")
+    const Detalhes_peso = document.querySelector("#Detalhes_peso")
+    const Detalhes_altura = document.querySelector("#Detalhes_altura")
+    const Detalhes_idade = document.querySelector("#Detalhes_idade")
+    Nome_aluno.textContent = `Ficha do aluno: ${user.nome_user}`
+    Detalhes_peso.textContent = `Peso: ${user.peso} kg`
+    Detalhes_altura.textContent = `Altura: ${user.altura} m`
+    Detalhes_idade.textContent = `Idade: ${user.idade}`
+    modalDetalhes.showModal()
+}
 
 
 async function deletar(id) {
