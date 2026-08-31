@@ -40,7 +40,7 @@
                 <input type="text" name="Duração" placeholder="Duração" id="duracao">
                 <label for="Repetição">Repetição:</label>
                 <input type="text" name="Repetição" placeholder="Repetição" id="repeticao">
-                <label for="usuario">usuario:</label>
+                <label for="usuario">Usuarios:</label>
                 <select name="usuario" id="id_usuario">
                 </select>
                 <button id="btn-confirmar" type="submit">Confirmar</button>
@@ -80,20 +80,19 @@
 
 
        <button id="closeDetalhes" aria-label="Fechar modal">
-        &times;
+        X
     </button>
 
     <div id="Detalhes">
 
         <div class="modal-header">
-            <span class="modal-tag">ALUNO</span>
             <h1 id="Nome_aluno"></h1>
         </div>
 
         <div class="detalhes-grid">
 
             <div class="detalhe-item">
-                <span class="icone">⚖</span>
+                <span class="icone">⚖ </span>
                 <div>
                     <small>PESO</small>
                     <p id="Detalhes_peso"></p>
@@ -119,23 +118,6 @@
         </div>
 
     </div>
-
-    </dialog>
-
-    <dialog id="modalLogin">
-
-        <div class="icone">🔒</div>
-
-        <h1>Acesso necessário</h1>
-
-        <p>
-            Faça login ou crie uma conta para acessar esta funcionalidade.
-        </p>
-
-        <div class="acoes">
-            <button class="login">Fazer Login</button>
-            <button class="cadastro">Cadastrar-se</button>
-        </div>
 
     </dialog>
     <script src="./script.js"></script>

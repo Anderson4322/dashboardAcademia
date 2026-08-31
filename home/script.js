@@ -9,7 +9,6 @@ btnCadastro.addEventListener('click', () => {
     window.location.href = "../register/index.html"
 })
 
-
 btnlogin.addEventListener('click', () => {
     window.location.href = "../Connect/index.html"
 })
@@ -154,6 +153,7 @@ async function ficha(id) {
     const Detalhes_altura = document.querySelector("#Detalhes_altura")
     const Detalhes_idade = document.querySelector("#Detalhes_idade")
     Nome_aluno.textContent = `Ficha do aluno: ${user.nome_user}`
+    Nome_aluno.style.fontSize = "20px"
     Detalhes_peso.textContent = `Peso: ${user.peso} kg`
     Detalhes_altura.textContent = `Altura: ${user.altura} m`
     Detalhes_idade.textContent = `Idade: ${user.idade}`

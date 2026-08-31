@@ -1,49 +1,45 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
 
-body{
+body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../imagem//IMG_7632.jpg");
-    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.585);
 }
 
-div{
+div {
     width: 400px;
     background: #fff;
     padding: 35px;
     border-radius: 18px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .3);
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
+    background: transparent;
 }
 
-form::before{
-    content: "Login";
+form h1 {
     text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    color: #1f2937;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
-label{
+label {
     margin-bottom: 8px;
     font-weight: 600;
     color: #4b5563;
 }
 
 #nome,
-#senha{
+#senha {
     width: 100%;
     height: 48px;
     padding: 0 15px;
@@ -59,20 +55,14 @@ label{
     transition: .3s;
 }
 
-#nome:focus,
-#senha:focus{
-    border-color: #ef4444;
-    box-shadow: 0 0 0 4px rgba(239,68,68,.15);
-}
-
-#enviar{
+#enviar {
     height: 48px;
 
     border: none;
     border-radius: 10px;
 
-    background: #ef4444;
-    color: white;
+    background: #020202;
+    color: rgb(240, 252, 3);
 
     font-size: 16px;
     font-weight: 600;
@@ -82,12 +72,11 @@ label{
     transition: .3s;
 }
 
-#enviar:hover{
-    background: #dc2626;
+#enviar:hover {
+    background: #4a4949;
     transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(239,68,68,.35);
 }
 
-#enviar:active{
+#enviar:active {
     transform: scale(.98);
 }

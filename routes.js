@@ -20,6 +20,7 @@ routes.get("/usuario", async (req, res) => {
   const resposta = await sql`select * from usuario`;
   return res.status(200).json(resposta);
 });
+
 routes.get("/usuario_especif/:id", async (req, res) => {
   const { id } = req.params;
   const resposta = await sql`select * from usuario where id_user= ${id}`;

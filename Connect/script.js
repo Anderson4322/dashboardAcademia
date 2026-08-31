@@ -25,10 +25,9 @@ if (resposta.status == 200) {
     localStorage.setItem('nome', usuarios.nome_user);
     localStorage.setItem('cargo', usuarios.cargo);
 
-    alert("Login Concluido!");
     window.location.href = "../home/index.html";
 } else {
-    alert("Usuario ou senha incorretos");
+   return alert("Usuario ou senha incorretos");
 }
 
 });
