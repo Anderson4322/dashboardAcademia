@@ -11,6 +11,8 @@ body {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.585);
+    background-image: url("../imagem/ChatGPT\ Image\ 27\ de\ ago.\ de\ 2026\,\ 14_26_50\ \(1\).png");
+    background-size: cover;
 }
 
 div {

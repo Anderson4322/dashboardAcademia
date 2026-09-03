@@ -4,15 +4,6 @@ const btnCadastro = document.querySelector(".cadastro")
 const cargo = localStorage.getItem("cargo")
 const name = localStorage.getItem("nome")
 
-
-btnCadastro.addEventListener('click', () => {
-    window.location.href = "../register/index.html"
-})
-
-btnlogin.addEventListener('click', () => {
-    window.location.href = "../Connect/index.html"
-})
-
 const alertModal = document.querySelector("#modalLogin");
 if (!name) {
     userName.textContent = " Visitante"
@@ -103,7 +94,6 @@ window.addEventListener("load", async () => {
 
     prods = await resposta.json();
     const users = await usuarios.json();
-    console.log(prods)
     users.forEach((prod) => {
         id_fabric.innerHTML += `
       <option value="${prod.id_user}">${prod.nome_user}</option>
@@ -145,20 +135,67 @@ async function ficha(id) {
         const modalDetalhes = document.querySelector("#DetalhesModal")
         modalDetalhes.close()
     })
+
     const usuario = await fetch(`${api}usuario_especif/${id}`);
     const user = await usuario.json();
+    const divDesativar = document.querySelector("#divDesativar")
     const modalDetalhes = document.querySelector("#DetalhesModal")
     const Nome_aluno = document.querySelector("#Nome_aluno")
     const Detalhes_peso = document.querySelector("#Detalhes_peso")
     const Detalhes_altura = document.querySelector("#Detalhes_altura")
     const Detalhes_idade = document.querySelector("#Detalhes_idade")
+    const Detalhes_status = document.querySelector("#Detalhes_status")
     Nome_aluno.textContent = `Ficha do aluno: ${user.nome_user}`
     Nome_aluno.style.fontSize = "20px"
     Detalhes_peso.textContent = `Peso: ${user.peso} kg`
     Detalhes_altura.textContent = `Altura: ${user.altura} m`
     Detalhes_idade.textContent = `Idade: ${user.idade}`
+    Detalhes_status.textContent = `${user.status}`
+
+    const desativarBtn = document.querySelector("#desativarBtn")
+    const ativarBtn = document.querySelector("#ativarBtn")
+
+    ativarBtn.addEventListener("click", () => {
+        Ativar(id)
+    })
+
+    desativarBtn.addEventListener("click", () => {
+        Desativar(id)
+    })
     modalDetalhes.showModal()
+
+    async function Ativar(id) {
+        const status = "ativo";
+        const resposta = await fetch(`${api}editarUser/${id}`, {
+            method: "PUT",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({ status })
+        })
+        if (resposta.status == 200) {
+            console.log(id, status)
+        } else {
+            return alert("Erro ao alterar")
+        }
+    }
+
+    async function Desativar(id) {
+        const status = "desativar";
+
+        const resposta = await fetch(`${api}editarUser/${id}`, {
+            method: "PUT",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({ status })
+        })
+        if (resposta.status == 200) {
+            console.log(id, status)
+        } else {
+            return alert("Erro ao alterar")
+        }
+    }
+
 }
+
+
 
 
 async function deletar(id) {

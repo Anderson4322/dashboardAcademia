@@ -18,12 +18,21 @@ form.addEventListener("submit", async (e) => {
   });
 if (resposta.status == 200) {
     const usuarios = await resposta.json();
+    
+    if(usuarios.cargo == 2){
+      localStorage.setItem('id', usuarios.id_prof);
+      localStorage.setItem('nome', usuarios.nome_prof);
+      localStorage.setItem('cargo', usuarios.cargo);
 
+    } else{
+
+      localStorage.setItem('id', usuarios.id_user);
+      localStorage.setItem('nome', usuarios.nome_user);
+      localStorage.setItem('cargo', usuarios.cargo);
+    }
+    
     console.log(usuarios);
 
-    localStorage.setItem('id', usuarios.id_user);
-    localStorage.setItem('nome', usuarios.nome_user);
-    localStorage.setItem('cargo', usuarios.cargo);
 
     window.location.href = "../home/index.html";
 } else {

@@ -57,18 +57,12 @@ label{
     transition: .3s;
 }
 
-#nome:focus,
-#senha:focus{
-    border-color: #ef4444;
-    box-shadow: 0 0 0 4px rgba(239,68,68,.15);
-}
-
 #cadastro{
     height: 48px;
     border: none;
     border-radius: 10px;
-    background: #ef4444;
-    color: white;
+    background: #030303;
+    color: rgb(237, 254, 0);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -76,7 +70,8 @@ label{
 }
 
 #cadastro:hover{
-    background: #dc2626;
+    background: #b0c703;
+    color: #010101;
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(239,68,68,.35);
 }

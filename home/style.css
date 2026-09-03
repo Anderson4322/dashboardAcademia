@@ -104,13 +104,11 @@ td {
   padding: 7px 7px;
   text-align: center;
   border-bottom: 1px solid #ddd;
-
 }
 
 td {
   background-color: rgba(255, 255, 255, 0.832);
 }
-
 
 tbody tr:hover {
   background: #d6eaf8;
@@ -187,6 +185,64 @@ form {
   cursor: pointer;
   transition: 0.3s;
 }
+#divDesativar {
+  width: 100%;
+  gap: 5px;
+  display: flex;
+  justify-content: right;
+}
+#ativarBtn {
+  background-color: #198754;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(25, 135, 84, 0.25);
+}
+
+#ativarBtn:hover {
+  background-color: #157347;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(25, 135, 84, 0.3);
+}
+
+#ativarBtn:active {
+  background-color: #146c43;
+  transform: translateY(0);
+}
+
+#ativarBtn:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+#desativarBtn {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#desativarBtn:hover {
+  background-color: #bb2d3b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+#desativarBtn:active {
+  background-color: #a52834;
+  transform: translateY(0);
+}
 
 #open:hover {
   transform: scale(1.05);
@@ -201,8 +257,6 @@ form {
   padding: 35px;
   margin: auto;
 }
-
-
 
 #modal::backdrop {
   background: rgba(0, 0, 0, 0.6);
@@ -266,7 +320,6 @@ form {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(5px);
 }
-
 
 .icone {
   font-size: 60px;

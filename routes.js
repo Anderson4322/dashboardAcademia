@@ -5,17 +5,23 @@ const routes = express.Router();
 routes.post("/login", async (req, res) => {
   try {
     const { user, password } = req.body;
-    console.log(req.body)
-    const resposta = await sql`select * from usuario where nome_user = ${user}`;
+    let resposta = await sql`select * from usuario where nome_user = ${user}`;
+
+    if (resposta.length === 0) {
+      resposta = await sql`select * from professor where nome_prof = ${user}`
+    }
+
     if (password == resposta[0].senha) {
       return res.status(200).json(resposta[0]);
+    } else {
+      return res.status(401).json("erro ao logar");
     }
-    return res.status(401).json("erro ao logar");
   } catch (error) {
     console.log(error);
     return res.status(500);
   }
 });
+
 routes.get("/usuario", async (req, res) => {
   const resposta = await sql`select * from usuario`;
   return res.status(200).json(resposta);
@@ -45,16 +51,18 @@ routes.delete("/deletar/:id", async (req, res) => {
   await sql`delete from usuario where id_user = ${id}`;
   return res.status(200).json("Deletado");
 });
+
 routes.put("/editarUser/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { nome } = req.body;
+    console.log(req.params)
+    const { status } = req.body;
     const resposta = await sql`UPDATE usuario
-	SET usuario=${nome}	WHERE id_user=${id} RETURNING *;`;
+	SET status=${status} WHERE id_user=${id} RETURNING *;`;
     return res.status(200).json(resposta[0]);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Erro ao deletar Usuario" });
+    return res.status(500).json({ error: "Erro ao editar Usuario" });
   }
 });
 
@@ -63,7 +71,7 @@ routes.put("/editarUser/:id", async (req, res) => {
 //Treinos
 routes.get("/treinos/:cargo/:id_user", async (req, res) => {
   const { cargo, id_user } = req.params;
- 
+
   let rows;
   if (cargo == 2) {
     rows = await sql`
@@ -86,7 +94,7 @@ routes.get("/treinos/:cargo/:id_user", async (req, res) => {
        where t.id_user = ${id_user}
     
       `;
-      
+
   }
   return res.status(200).json(rows);
 });
